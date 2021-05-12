@@ -49,7 +49,7 @@ from rmgpy.molecule.group import Group
 from rmgpy.data.rmg import get_db
 from rmgpy.display import display
 from rmgpy.exceptions import ForbiddenStructureException
-from rmgpy.kinetics import KineticsData, Arrhenius
+from rmgpy.kinetics import KineticsData, Arrhenius, SurfaceChargeTransfer
 from rmgpy.quantity import Quantity
 from rmgpy.reaction import Reaction
 from rmgpy.rmg.pdep import PDepReaction, PDepNetwork
@@ -589,7 +589,9 @@ class CoreEdgeReactionModel:
 
         return forward
 
-    def enlarge(self, new_object=None, react_edge=False, unimolecular_react=None, bimolecular_react=None, trimolecular_react=None):
+    def enlarge(self, new_object=None, react_edge=False,
+                unimolecular_react=None, bimolecular_react=None, trimolecular_react=None,
+                temperature=None, potential=None):
         """
         Enlarge a reaction model by processing the objects in the list `new_object`.
         If `new_object` is a
@@ -703,6 +705,35 @@ class CoreEdgeReactionModel:
         # Do thermodynamic filtering
         if not np.isinf(self.thermo_tol_keep_spc_in_edge) and self.new_species_list != []:
             self.thermo_filter_species(self.new_species_list)
+
+        # Generate kinetics of new reactions
+        if self.new_reaction_list:
+            logging.info('Generating kinetics for new reactions...')
+        for reaction in self.new_reaction_list:
+            # If the reaction already has kinetics (e.g. from a library),
+            # assume the kinetics are satisfactory
+            if reaction.kinetics is None:
+                self.apply_kinetics_to_reaction(reaction)
+
+        # For new reactions, convert ArrheniusEP to Arrhenius, and fix barrier heights.
+        # self.new_reaction_list only contains *actually* new reactions, all in the forward direction.
+        for reaction in self.new_reaction_list:
+            # convert KineticsData to Arrhenius forms
+            if isinstance(reaction.kinetics, KineticsData) and not isinstance(reaction.kinetics, SurfaceChargeTransfer):
+                reaction.kinetics = reaction.kinetics.to_arrhenius()
+
+            if isinstance(reaction.kinetics, SurfaceChargeTransfer):
+                reaction.set_reference_potential(temperature)
+
+                #  correct barrier heights of estimated kinetics
+            if isinstance(reaction, TemplateReaction) or isinstance(reaction,
+                                                                    DepositoryReaction):  # i.e. not LibraryReaction
+                reaction.fix_barrier_height()  # also converts ArrheniusEP to Arrhenius.
+
+            if self.pressure_dependence and reaction.is_unimolecular():
+                # If this is going to be run through pressure dependence code,
+                # we need to make sure the barrier is positive.
+                reaction.fix_barrier_height(force_positive=True)
 
         # Update unimolecular (pressure dependent) reaction networks
         if self.pressure_dependence:
