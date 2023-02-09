@@ -1417,6 +1417,7 @@ def generated_species_constraints(**kwargs):
         'maximumCarbeneRadicals',
         'allowSingletO2',
         'speciesCuttingThreshold',
+        'maximumBoronAtoms'
     ]
 
     for key, value in kwargs.items():
