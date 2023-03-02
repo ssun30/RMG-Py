@@ -341,7 +341,9 @@ element_list = [
 # (between RT and 3/2 RT), and this difference is usually much smaller than the uncertainty in the bond dissociation
 # energy itself. Therefore, the discrepancy between 0 K and 298 K shouldn't matter too much.
 # But for any new entries, try to use the consistent reference state of 298 K.
-bde_elements = ['C', 'N', 'H', 'O', 'S', 'Cl', 'Si', 'P', 'F', 'Br', 'I', 'B']  # elements supported by BDE
+# Boron BDE data were from the NBS/NIST data, but B-C and B-Si are values at 0 K. 
+bde_elements = ['C', 'N', 'H', 'O', 'S', 'Cl', 'Si', 'P', 'F', 'Br', 'I', 'B']  
+# elements supported by BDE
 bde_dict = {('H', 'H', 1.0): (432.0, 'kJ/mol'), ('H', 'C', 1): (411.0, 'kJ/mol'),
             ('H', 'N', 1): (386.0, 'kJ/mol'), ('H', 'O', 1.0): (459.0, 'kJ/mol'),
             ('H', 'P', 1): (322.0, 'kJ/mol'), ('H', 'S', 1): (363.0, 'kJ/mol'),
