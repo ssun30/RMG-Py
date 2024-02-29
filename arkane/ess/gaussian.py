@@ -351,6 +351,12 @@ class GaussianLog(ESSAdapter):
                     # G4MP2 calculation without opt and freq calculation
                     # Keyword in Gaussian G4MP2(SP), No zero-point or thermal energies are included.
                     e_elect = float(line.split()[2]) * constants.E_h * constants.Na
+                elif 'W1BD (0 K)' in line:
+                    e0_composite = float(line.split()[3]) * constants.E_h * constants.Na
+                elif 'W1BD  Energy=' in line:
+                    # G4MP2 calculation without opt and freq calculation
+                    # Keyword in Gaussian W1BD(SP), No zero-point or thermal energies are included.
+                    e_elect = float(line.split()[2]) * constants.E_h * constants.Na
 
                 # Read the ZPE from the "E(ZPE)=" line, as this is the scaled version.
                 # Gaussian defines the following as
