@@ -45,7 +45,7 @@ from rmgpy.kinetics import Arrhenius, ArrheniusEP, ThirdBody, Lindemann, Troe, \
                            PDepArrhenius, MultiArrhenius, MultiPDepArrhenius, \
                            Chebyshev, KineticsData, StickingCoefficient, \
                            StickingCoefficientBEP, SurfaceArrhenius, SurfaceArrheniusBEP, \
-                           ArrheniusBM, SurfaceChargeTransfer, KineticsModel
+                           ArrheniusBM, SurfaceChargeTransfer, KineticsModel, Marcus
 from rmgpy.molecule import Molecule, Group
 from rmgpy.reaction import Reaction, same_species_lists
 from rmgpy.species import Species
@@ -86,6 +86,7 @@ class KineticsDatabase(object):
             'SoluteTSData': SoluteTSData,
             'SoluteTSDiffData': SoluteTSDiffData,
             'KineticsModel': KineticsModel,
+            'Marcus': Marcus,
         }
         self.global_context = {}
 
