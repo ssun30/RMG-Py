@@ -605,7 +605,7 @@ def to_rms(obj, species_names=None, rms_species_list=None, rmg_species=None):
         #     A *= np.exp(obj._alpha.value_si*obj._electrons.value_si*constants.F*obj.V0.value_si/constants.R/300)
         n = obj._n.value_si
         Ea = obj._Ea.value_si
-        q = obj._alpha.value_si*obj._electrons.value_si    
+        q = obj._alpha.value_si*obj._electrons.value_si
         return rms.Arrheniusq(A, n, Ea, q, rms.EmptyRateUncertainty())
     elif isinstance(obj, SurfaceChargeTransfer):
         A = obj._A.value_si
@@ -725,7 +725,7 @@ def to_rms(obj, species_names=None, rms_species_list=None, rmg_species=None):
             else:
                 atomnums[atm.element.symbol] = 1
         bondnum = len(mol.get_all_edges())
-        
+
         if not obj.molecule[0].contains_surface_site():
             rad = rms.getspeciesradius(atomnums, bondnum)
             diff = rms.StokesDiffusivity(rad)
@@ -783,8 +783,6 @@ def to_rms(obj, species_names=None, rms_species_list=None, rmg_species=None):
         productinds = [species_names.index(spc.label) for spc in obj.products]
         reactants = [rms_species_list[i] for i in reactantinds]
         products = [rms_species_list[i] for i in productinds]
-        if isinstance(obj.kinetics, SurfaceChargeTransfer):
-            obj.set_reference_potential(300)
         kinetics = to_rms(obj.kinetics, species_names=species_names, rms_species_list=rms_species_list, rmg_species=rmg_species)
         radchange = sum([spc.molecule[0].multiplicity-1 for spc in obj.products]) - sum([spc.molecule[0].multiplicity-1 for spc in obj.reactants])
         electronchange = -sum([spc.molecule[0].get_net_charge() for spc in obj.products]) + sum([spc.molecule[0].get_net_charge() for spc in obj.reactants])

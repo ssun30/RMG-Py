@@ -49,7 +49,7 @@ from rmgpy.molecule.group import Group
 from rmgpy.data.rmg import get_db
 from rmgpy.display import display
 from rmgpy.exceptions import ForbiddenStructureException
-from rmgpy.kinetics import KineticsData, Arrhenius
+from rmgpy.kinetics import KineticsData, Arrhenius, SurfaceChargeTransfer
 from rmgpy.quantity import Quantity
 from rmgpy.reaction import Reaction
 from rmgpy.rmg.pdep import PDepReaction, PDepNetwork
@@ -554,6 +554,8 @@ class CoreEdgeReactionModel:
                 # If this is going to be run through pressure dependence code,
                 # we need to make sure the barrier is positive.
                 forward.fix_barrier_height(force_positive=True,solvent="")
+            if isinstance(forward.kinetics, SurfaceChargeTransfer):
+                forward.set_reference_potential(300)
 
         # Since the reaction is new, add it to the list of new reactions
         self.new_reaction_list.append(forward)
@@ -1587,7 +1589,7 @@ class CoreEdgeReactionModel:
         self.new_reaction_list = []
         self.new_species_list = []
         edge_species_to_move = []
-        
+
         num_old_core_species = len(self.core.species)
         num_old_core_reactions = len(self.core.reactions)
 
