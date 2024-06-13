@@ -195,8 +195,7 @@ class ArkaneGaussianLogTest:
         tests parsing of gaussian16 log file for ethane (C2H6)
         """
 
-        log = GaussianLog(os.path.join(os.path.dirname(os.path.dirname(__file__)),
-                                          '../examples/arkane/species/C2H6/', 'ethane_g4.log'))
+        log = GaussianLog(os.path.join(self.data_path, "ethylene_G4.log"))
         conformer = log.load_conformer(symmetry=18)[0]
         e0 = log.load_energy()
 
