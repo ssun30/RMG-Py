@@ -877,15 +877,15 @@ ATOMTYPES['I1s'].set_actions(increment_bond=[], decrement_bond=[], form_bond=['I
 ATOMTYPES['F'].set_actions(increment_bond=[], decrement_bond=[], form_bond=['F'], break_bond=['F'], increment_radical=['F'], decrement_radical=['F'], increment_lone_pair=[], decrement_lone_pair=[], increment_charge=[], decrement_charge=[])
 ATOMTYPES['F1s'].set_actions(increment_bond=[], decrement_bond=[], form_bond=['F1s'], break_bond=['F1s'], increment_radical=['F1s'], decrement_radical=['F1s'], increment_lone_pair=[], decrement_lone_pair=[], increment_charge=[], decrement_charge=[])
 
-ATOMTYPES['B'].set_actions(increment_bond=['B'], decrement_bond=['B'], form_bond=['B'], break_bond=['B'], increment_radical=['B'], decrement_radical=['B'], increment_lone_pair=[], decrement_lone_pair=[])
-ATOMTYPES['Bs'].set_actions(increment_bond=['Bd', 'BO'], decrement_bond=[], form_bond=['Bs'], break_bond=['Bs'], increment_radical=['Bs'], decrement_radical=['Bs'], increment_lone_pair=[], decrement_lone_pair=[])
-ATOMTYPES['Bd'].set_actions(increment_bond=['Bt'], decrement_bond=['Bs'], form_bond=['Bd'], break_bond=['Bd'], increment_radical=['Bd'], decrement_radical=['Bd'], increment_lone_pair=[], decrement_lone_pair=[])
-ATOMTYPES['Bt'].set_actions(increment_bond=[], decrement_bond=['Bd'], form_bond=['Bt'], break_bond=['Bt'], increment_radical=['Bt'], decrement_radical=['Bt'], increment_lone_pair=[], decrement_lone_pair=[])
-ATOMTYPES['BO'].set_actions(increment_bond=[], decrement_bond=['Bs'], form_bond=['BO'], break_bond=['BO'], increment_radical=['BO'], decrement_radical=['BO'], increment_lone_pair=[], decrement_lone_pair=[])
-ATOMTYPES['Bb'].set_actions(increment_bond=[], decrement_bond=[], form_bond=['Bb'], break_bond=['Bb'], increment_radical=['Bb'], decrement_radical=['Bb'], increment_lone_pair=[], decrement_lone_pair=[])
-ATOMTYPES['Bbf'].set_actions(increment_bond=[], decrement_bond=[], form_bond=[], break_bond=[], increment_radical=[], decrement_radical=[], increment_lone_pair=[], decrement_lone_pair=[])
-ATOMTYPES['B1+'].set_actions(increment_bond=['B'], decrement_bond=['B1+'], form_bond=['B'], break_bond=['B'], increment_radical=['B1+'], decrement_radical=['B1+'], increment_lone_pair=[], decrement_lone_pair=[])
-ATOMTYPES['B1-'].set_actions(increment_bond=[], decrement_bond=['B'], form_bond=['B1-'], break_bond=['B1-'], increment_radical=[], decrement_radical=['B1-'], increment_lone_pair=[], decrement_lone_pair=[])
+ATOMTYPES['B'].set_actions(increment_bond=['B'], decrement_bond=['B'], form_bond=['B'], break_bond=['B'], increment_radical=['B'], decrement_radical=['B'], increment_lone_pair=[], decrement_lone_pair=[], increment_change=[], decrement_charge=[])
+ATOMTYPES['Bs'].set_actions(increment_bond=['Bd', 'BO'], decrement_bond=[], form_bond=['Bs'], break_bond=['Bs'], increment_radical=['Bs'], decrement_radical=['Bs'], increment_lone_pair=[], decrement_lone_pair=[], increment_charge=[], decrement_charge=[])
+ATOMTYPES['Bd'].set_actions(increment_bond=['Bt'], decrement_bond=['Bs'], form_bond=['Bd'], break_bond=['Bd'], increment_radical=['Bd'], decrement_radical=['Bd'], increment_lone_pair=[], decrement_lone_pair=[], increment_charge=[], decrement_charge=[])
+ATOMTYPES['Bt'].set_actions(increment_bond=[], decrement_bond=['Bd'], form_bond=['Bt'], break_bond=['Bt'], increment_radical=['Bt'], decrement_radical=['Bt'], increment_lone_pair=[], decrement_lone_pair=[], increment_charge=[], decrement_charge=[])
+ATOMTYPES['BO'].set_actions(increment_bond=[], decrement_bond=['Bs'], form_bond=['BO'], break_bond=['BO'], increment_radical=['BO'], decrement_radical=['BO'], increment_lone_pair=[], decrement_lone_pair=[], increment_charge=[], decrement_charge=[])
+ATOMTYPES['Bb'].set_actions(increment_bond=[], decrement_bond=[], form_bond=['Bb'], break_bond=['Bb'], increment_radical=['Bb'], decrement_radical=['Bb'], increment_lone_pair=[], decrement_lone_pair=[], increment_charge=[], decrement_charge=[])
+ATOMTYPES['Bbf'].set_actions(increment_bond=[], decrement_bond=[], form_bond=[], break_bond=[], increment_radical=[], decrement_radical=[], increment_lone_pair=[], decrement_lone_pair=[], increment_charge=[], decrement_charge=[])
+ATOMTYPES['B1+'].set_actions(increment_bond=['B'], decrement_bond=['B1+'], form_bond=['B'], break_bond=['B'], increment_radical=['B1+'], decrement_radical=['B1+'], increment_lone_pair=[], decrement_lone_pair=[], increment_charge=[''], decrement_charge=[''])
+ATOMTYPES['B1-'].set_actions(increment_bond=[], decrement_bond=['B'], form_bond=['B1-'], break_bond=['B1-'], increment_radical=[], decrement_radical=['B1-'], increment_lone_pair=[], decrement_lone_pair=[], increment_charge=[''], decrement_charge=[''])
 
 # these are ordered in priority of picking if a more general atomtype is encountered
 allElements = ['H', 'C', 'O', 'N', 'S', 'P', 'B', 'Si', 'F', 'Cl', 'Br', 'I', 'Li', 'Ne', 'Ar', 'He', 'X', 'e', ]
